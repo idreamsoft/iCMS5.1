@@ -1,0 +1,51 @@
+<!--Sidebar-->
+
+<div id="sidebar"> 
+  <!--Search-->
+  <div class="search">
+    <form name="searchForm" method="get" action="<!--{$site.publicURL}-->/search.php" id="search" target="_blank">
+      <input name="q" type="text" class="search-input" id="q" size="42" value="请输入关键字" onclick="this.value='';"/>
+      <input type="submit" value="" class="so" onmouseout="this.className='so'" onmouseover="this.className='soHover'" />
+    </form>
+  </div>
+  <!--Search End-->
+  <h1>分类</h1>
+  <div class="classify">
+    <ul>
+      <!--{iCMS:forums loop='true'}--> 
+      <li<!--{if $forums.last}--> class="none" <!--{/if}--> 
+      ><a href="<!--{$forums.url}-->"><!--{$forums.name}--></a> <span>(<!--{$forums.count}-->)</span>
+      </li>
+      <!--{/iCMS}-->
+    </ul>
+  </div>
+  <h1>最新文章</h1>
+  <div class="classify">
+    <ul>
+      <!--{iCMS:list loop='true' row="10"}-->
+      <li><a href="<!--{$list.url}-->" title="<!--{$list.title}-->"><!--{$list.title}--></a></li>
+      <!--{/iCMS}-->
+    </ul>
+  </div>
+  <h1>归档</h1>
+  <div class="classify"> 
+    <!--{iCMS:plugins name="archives"}--> 
+  </div>
+  <h1>最新评论</h1>
+  <div class="newcm"> 
+    <!--{iCMS:comment loop='true' row="10" type="all"}-->
+    <dl>
+      <dt> <b> <a href="javascript:void(0);"><!--{$comment.username}--></a> </b> <em>02-15</em> </dt>
+      <dd><!--{$comment.content|html2txt|cut:28:'…'}-->... <a title="<!--{$comment.title}-->" href="<!--{$comment.url}-->">»</a></dd>
+    </dl>
+    <!--{/iCMS}--> 
+    
+  </div>
+  <!--友情链接--> 
+  <!--友情链接 End-->
+  <h1>统计</h1>
+  <div class="classify"> 
+    <!--{iCMS:plugins name="statistics"}--> 
+  </div>
+</div>
+<!--Sidebar End--> 

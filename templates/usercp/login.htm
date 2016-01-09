@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登陆-<!--{$site.title}--></title>
+<meta content="" name="keywords">
+<meta content="" name="description">
+<!--{iCMS:public}-->
+<link href="style/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	$("#seccodeimg").click(function(){
+		$(this).attr('src',iCMS.publicURL+"/seccode.php?"+Math.random())
+	}); 
+	$("#iLogin").submit(function(){
+		var param=iCMS.chkLogInput();
+		if(!param)return false;
+		<!--{if $config.seccode}-->
+		param.seccode=$('#seccode').val();
+		param.seccode=="" && alert("请填写验证码!");
+		<!--{/if}-->
+		param.action='login';
+		param.forward='<!--{$forward}-->';
+		$.post(iCMS.publicURL+"/passport.php",param,
+			function(o){
+				alert(o.msg);
+				if(o.state=="1"){
+					window.location.href= (param.forward ?param.forward:'<!--{$site.usercpURL}-->');
+				}
+			},"json");
+		return false;
+	});
+})
+</script>
+
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">
+      <h1><img alt="iCMS" src="<!--{$site.publicURL}-->/common/iCMS.logo.gif" width="136"></h1>
+    </div>
+    <div class="toplink"> <a target="_blank" href="<!--{$site.url}-->">返回首页</a> </div>
+  </div>
+  <div class="content">
+    <div id="divTheme" class="main">
+      <div id="divText" class="intro">
+        <dl>
+          <dt>&nbsp;</dt>
+          <dd>iCMS 开源,免费 简洁,易用</dd>
+          <dd>用户投稿管理</dd>
+        </dl>
+      </div>
+      <div id="divLogin" class="login">
+        <div class="tabs">
+          <div class="tab tab-1"><i class="ico-focus"></i>用户登陆</div>
+        </div>
+        <div class="panel">
+          <form action="" name="login" method="post" id="iLogin">
+            <div class="fi" id="uName">
+              <label class="lb">电子邮件</label>
+              <input type="text" maxlength="50" name="iCMS_UserName" class="ipt-t" tabindex="1" id="iCMS_UserName">
+            </div>
+            <div class="fi">
+              <label class="lb">密　　码</label>
+              <input type="password" name="iCMS_PassWord" class="ipt-t" tabindex="2" id="iCMS_PassWord">
+              <a tabindex="2" title="找回密码" target="_blank" href="<!--{$site.publicURL}-->/passport.php?do=RecoverPasswd" class="forget">忘记密码了?</a> </div>
+        <!--{if $config.seccode}-->
+            <div class="fi" id="uSeccode">
+              <label class="lb">　验证码</label>
+              <input type="text" size="6" maxlength="4" name="seccode" class="ipt-t" tabindex="3" id="seccode" style="width:60px;"><img src="<!--{$site.publicURL}-->/seccode.php" align="absmiddle" id="seccodeimg" title="看不清楚，换一张">
+            </div>
+        <!--{/if}-->
+            <div class="fi fi-nolb">
+              <button type="submit" tabindex="6" onmouseup="this.className='btn btn-login'" onmouseout="this.className='btn btn-login'" onmousedown="this.className+=' btn-login-active'" onmouseover="this.className+=' btn-login-hover'" class="btn btn-login">登 录</button>
+              <a target="_blank" href="<!--{$site.publicURL}-->/passport.php?do=register" tabindex="8" class="btn btn-reg">注 册</a> </div>
+          </form>
+          <div class="ext">
+            <h3>为什么要用电子邮件登录？</h3>
+            <ul>
+              <li>好友可直接发邮件到<span class="ne-txt-song">"</span>你的电子邮箱<span class="ne-txt-song">"</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"></div>
+</div>
+</body>
+</html>

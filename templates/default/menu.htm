@@ -1,0 +1,8 @@
+<div id="globalheader">
+	<ul id="globalnav">
+	<li id="first"><a href="/">首 页</a>
+	<!--{iCMS:forums loop='true' type="top" row="10"}-->
+		<li id="gn<!--{$forums.name|count}-->" class="<!--{if $forums.fid==$forum.fid||$forums.fid==$forum.rootid}-->current<!--{/if}--><!--{if $forums.last}--> gn-last<!--{/if}-->"><a href="<!--{$forums.url}-->"><span><!--{$forums.name}--></span></a></li>
+	 <!--{/iCMS}-->
+	</ul>
+</div>

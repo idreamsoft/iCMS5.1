@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$show.title}-->评论-<!--{$site.seotitle}--></title>
+<meta name="keywords" content="<!--{$site.keywords}-->">
+<meta name="description" content="<!--{$site.description|html2txt}-->">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="stylesheet" type="text/css" media="all" href="style.css" />
+<!--{iCMS:public}-->
+<link rel="alternate" type="application/rss+xml" title="<!--{$site.title}-->" href="<!--{$site.publicURL}-->/rss.php" />
+<!--[if IE 6]>
+<script type="text/javascript" src="png24.js" ></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('#top,a#logo,a#logo:hover,#menu li a:hove,#menu li#on a,#menu li#rss,#menu li a.rss,#menu li a.rss:hover,#menu li a.feed,#menu li a.feed:hover');
+</script>
+<![endif]-->
+</head>
+<body>
+<!--{include file="./header.htm"}-->
+<div id="container"> 
+  <!--Content-->
+  <div id="content">
+    <div class="content_text3">
+      <div class="title"> <a href="javascript:void(0);" class="avatar"><img alt="" class="avatar" src="<!--{$show.userid|avatar:48}-->" width="48" height="48" /></a> <i class="line_h"></i>
+        <h3><!--{$show.title}--></h3>
+        <p> <!--{$show.editor|default:$show.author}--> / <a href="<!--{$forum.url}-->"><!--{$forum.name}--></a> / <!--{$show.pubdate|date:"Y-m-d,H:i a"}--></p>
+        <a onfocus="this.blur()" class="up" href="<!--{$show.commentUrl}-->" title="<!--{$show.comments}-->条评论"><!--{$show.comments}--></a> </div>
+      <!--content_banner-->
+      <div class="content_banner">
+        <div class="text"> 
+          <!--{$show.body}--> 
+        </div>
+        <div class="pagebreak"> <!--{$show.pagebreak}--> </div>
+        <!--appendInfo-->
+        <div class="appendInfo">
+          <ul>
+            <li class="come_from">(<span>本文出自<!--{$site.title}-->，转载时请注明出处</span>)</li>
+          </ul>
+          <p>上一篇: <!--{$show.prev}--></p>
+          <p>下一篇: <!--{$show.next}--></p>
+        </div>
+      </div>
+      <!--Comment-->
+      <div class="comment" id="comments">
+        <p><b class="left">文章评论</b> <b class="right"> 共有<!--{$show.comments}-->条评论(<a href="#commentform">写评论</a> , <a href="#" onClick="window.print();">打印</a>, <a href="#" onClick="window.close();">关闭</a> )</b></p>
+<ul id="comment">
+  <!--{iCMS:comment row='10' orderby='new' loop='true' page='true' mid=$appInfo.mId sortid=$appInfo.sortId indexid=$appInfo.indexId}-->
+  <li id="cm<!--{$comment.id}-->"> <a href="javascript:void(0);" class="avatar" target="_blank"><img alt="" class="avatar" src="<!--{$comment.userId|avatar:48}-->" width="36" height="36" /></a>
+    <div>
+      <h2><a href='javascript:void(0)' id="quote<!--{$comment.id}-->">#<!--{$comment.lou}--></a> <span class="urse"><!--{$comment.username}--></span> <span class="c_time"><!--{$comment.addtime|date:"Y-m-d, H:i A"}--></span></h2>
+      <p id="comm_<!--{$comment.id}-->"><!--{$comment.contents}--></p>
+      <p class="comment-action"><a href='javascript:iCMS.digg("up",<!--{$comment.indexId}-->,<!--{$comment.id}-->)'>支持[+<span id='up_<!--{$comment.id}-->'><!--{$comment.up}--></span>]</a><a href='javascript:iCMS.digg("down",<!--{$comment.indexId}-->,<!--{$comment.id}-->)'>反对[-<span id='down_<!--{$comment.id}-->'><!--{$comment.down}--></span>]</a> <a href='javascript:iCMS.quote(<!--{$comment.id}-->,<!--{$comment.floor}-->)' id="quote<!--{$comment.id}-->">回复</a> <a href='javascript:iCMS.unquote(<!--{$comment.id}-->)' id="unquote<!--{$comment.id}-->" style="display:none;">取消回复</a></p>
+    </div>
+  </li>
+  <!--{iCMSelse}--> 暂无评论 <!--{/iCMS}-->
+</ul>
+      </div>
+      <div class="p_bar"><!--{$pagenav}--></div>
+      <!--Comment End--> 
+      <!--commentform-->
+      <div class="commentform">
+        <h4>发表评论 <a href="#top" class="back_top"></a></h4>
+        <div class="postbox"><!--{iCMS:comment width='600' height='120'}--></div>
+      </div>
+      <!--commentform End--> 
+      
+    </div>
+  </div>
+  <!--Content End--> 
+  <!--{include file="./sidebar.htm"}--> 
+</div>
+<!--Container End--> 
+<!--{include file="./footer.htm"}-->
+</body>
+</html>

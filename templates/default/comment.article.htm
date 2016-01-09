@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$show.title}-->评论-<!--{$site.title}-->-<!--{$site.seotitle}--></title>
+<meta name="keywords" content="<!--{$show.keywords}-->">
+<meta name="description" content="<!--{$show.description|html2txt}-->">
+<!--{iCMS:public}-->
+<link href="style/global.css" rel="stylesheet" type="text/css" />
+<link href="style/article.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!--{include file="./top.htm"}-->
+<div class="container">
+<!--{include file="./header.htm"}-->
+<div class="ivy"><!--{iCMS:advertise name="内容页顶部通栏下面"}--></div>
+<div class="main cbody"> <!--左侧-->
+  <div class="pleft">
+    <div class="placenav"> <span>当前位置 :</span><a href="/">首页</a> »  <!--{$forum.nav}--> > <!--{$show.link}--></div>
+    <!--资讯内容-->
+    <div class="cBox"> <!--资讯标题-->
+      <div class="title">
+        <h1><!--{$show.title}--></h1>
+      </div>
+      <!--相关信息-->
+      <div class="info"><span><!--{$show.pubdate|date:"Y-m-d H:i:s"}--></span>&nbsp;&nbsp;&nbsp;作者：<span><!--{$show.author|default:'佚名'}--></span>&nbsp;&nbsp;&nbsp;<span>出处：<!--{$show.source|default:'互联网'}--></span>&nbsp;&nbsp;&nbsp;录入：<span><!--{$show.editor|default:'cpOne'}--> </span> <span style="display:none;"><!--{$show.hits}--></span></div>
+      <!--{if $show.tags}-->
+      <div class="taglink">相关专题: <span><!--{$show.taglink}--></span> </div>
+      <!--{/if}--> 
+      <!--资讯正文-->
+      <div class="content"><!--{$show.description}--></div>
+      <div style="text-align:right"><a href="<!--{$show.url}-->" target="_blank">查看详情</a></div>
+      <!--操作--> 
+      <!--上下文-->
+      <div class="context">
+        <div class='diggArea'>
+          <div class='diggNum' id='good_<!--{$show.id}-->'><!--{$show.good}--></div>
+          <div class="diggLink"><a href="javascript:iCMS.digg('good',<!--{$show.id}-->);">给力</a></div>
+        </div>
+        <div class='diggArea'>
+          <div class='diggNum' id='bad_<!--{$show.id}-->'><!--{$show.bad}--></div>
+          <div class="diggLink"><a href="javascript:iCMS.digg('bad',<!--{$show.id}-->);">浮云</a></div>
+        </div>
+        <div style="float:left; margin-left:20px;">上一篇： <!--{$show.prev}--> <br />
+          下一篇： <!--{$show.next}--> </div>
+      </div>
+      <div class="floatclear"><!--清除浮动--></div>
+      <div class="actbar"> <span>[<a href="#" onClick="window.print();">打印</a>]</span> <span>[<a href="#" onClick="window.close();">关闭</a>]</span> </div>
+      <div class="floatclear"><!--清除浮动--></div>
+    </div>
+    <div class="blank6"></div>
+    <!--评论-->
+    <div class="comment"> <!--评论:标题-->
+      <div class="commenttitle">
+        <div class="title"><strong>最新评论</strong>共有 <!--{$show.comments}--> 位网友发表了评论 </div>
+      </div>
+      <!--评论内容-->
+      <div class="commentbox">
+        <ol id="comment">
+          <!--{iCMS:comment row='10' orderby='new' loop='true' page='true' mid=$show.mid sortid=$show.fid indexid=$show.id}-->
+          <li class="comment-list" id="comment-<!--{$comment.id}-->">
+            <div class="comment-info"><span id="lou_<!--{$comment.id}-->" style='color:#990000'><!--{$comment.lou}-->楼</span> <span class="avatar"><img src="<!--{$comment.userId|avatar}-->" align="absmiddle"/></span><span id="comment_username_<!--{$comment.id}-->" class="username"><!--{$comment.username}--></span> 于<span id="comment_time_<!--{$comment.id}-->"><!--{$comment.addtime|date:"Y-m-d H:i"}--></span>评论道 </div>
+            <div class="comment-content"><!--{$comment.contents}--></div>
+            <div class="comment-action"><a href='javascript:iCMS.digg("up",<!--{$comment.indexId}-->,<!--{$comment.id}-->)'>支持[+<span id='up_<!--{$comment.id}-->'><!--{$comment.up}--></span>]</a><a href='javascript:iCMS.digg("down",<!--{$comment.indexId}-->,<!--{$comment.id}-->)'>反对[-<span id='down_<!--{$comment.id}-->'><!--{$comment.down}--></span>]</a><a href='javascript:iCMS.quote(<!--{$comment.id}-->,<!--{$comment.floor}-->)' id="quote<!--{$comment.id}-->">回复</a> <a href='javascript:iCMS.unquote(<!--{$comment.id}-->)' id="unquote<!--{$comment.id}-->" style="display:none;">取消回复</a></div>
+            <div class="clearfloat"></div>
+          </li>
+          <!--{iCMSelse}--> 暂无评论 <!--{/iCMS}-->
+        </ol>
+      </div>
+      <div class="page"><!--{$pagenav}--></div>
+      <!--发表评论:标题-->
+      <div class="posttitle"><strong>发表评论</strong></div>
+      <!--发表评论-->
+      <div class="postbox"><!--{iCMS:comment width='98%' height='120'}--></div>
+    </div>
+  </div>
+  <!--右侧-->
+  <div class="pright"> <!--侧边信息列表-->
+    <div class="rlist">
+      <div class="title">最新评论</div>
+      <div class="rbox">
+        <ul class='txtlist'>
+          <!--{iCMS:comment loop='true' row="10" type="all"}-->
+          <li><a href="<!--{$comment.url}-->" target="_blank" title="<!--{$comment.username}-->评论[<!--{$comment.title}-->]说:<!--{$comment.content|html2txt}-->"><!--{$comment.content|html2txt|cut:21}--></a></li>
+          <!--{/iCMS}-->
+        </ul>
+      </div>
+    </div>
+    <div class="rlist mt10">
+      <div class="title">热评文章</div>
+      <div class="rbox">
+        <ul class='txtlist'>
+          <!--{iCMS:list row="10" orderby='comment' loop='true'}-->
+          <li><a href='<!--{$list.url}-->'><!--{$list.title}--></a></li>
+          <!--{/iCMS}-->
+        </ul>
+      </div>
+    </div>
+    <div class="floatclear"><!--清除浮动--></div>
+  </div>
+  <!--{include file="./footer.htm"}--> </div>
+</body>
+</html>

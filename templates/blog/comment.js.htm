@@ -1,0 +1,14 @@
+<!--{capture assign=html}-->
+
+<ul id="comment">
+  <!--{iCMS:comment row='10' orderby='new' loop='true' page='true' mid=$appInfo.mId sortid=$appInfo.sortId indexid=$appInfo.indexId}-->
+  <li id="cm<!--{$comment.id}-->"> <a href="javascript:void(0);" class="avatar" target="_blank"><img alt="" class="avatar" src="<!--{$comment.userId|avatar:48}-->" width="36" height="36" /></a>
+    <div>
+      <h2><a href='javascript:void(0)' id="quote<!--{$comment.id}-->">#<!--{$comment.lou}--></a> <span class="urse"><!--{$comment.username}--></span> <span class="c_time"><!--{$comment.addtime|date:"Y-m-d, H:i A"}--></span></h2>
+      <p id="comm_<!--{$comment.id}-->"><!--{$comment.contents}--></p>
+      <p class="comment-action"><a href='javascript:iCMS.digg("up",<!--{$comment.indexId}-->,<!--{$comment.id}-->)'>支持[+<span id='up_<!--{$comment.id}-->'><!--{$comment.up}--></span>]</a><a href='javascript:iCMS.digg("down",<!--{$comment.indexId}-->,<!--{$comment.id}-->)'>反对[-<span id='down_<!--{$comment.id}-->'><!--{$comment.down}--></span>]</a> <a href='javascript:iCMS.quote(<!--{$comment.id}-->,<!--{$comment.floor}-->)' id="quote<!--{$comment.id}-->">回复</a> <a href='javascript:iCMS.unquote(<!--{$comment.id}-->)' id="unquote<!--{$comment.id}-->" style="display:none;">取消回复</a></p>
+    </div>
+  </li>
+  <!--{iCMSelse}--> 暂无评论 <!--{/iCMS}-->
+</ul>
+<!--{/capture}--> document.write("<!--{ $html|html2js }-->");

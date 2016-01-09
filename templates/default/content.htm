@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$content.title}-->-<!--{$site.title}-->-<!--{$site.seotitle}--></title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<!--{iCMS:public}-->
+<link href="style/global.css" rel="stylesheet" type="text/css" />
+<link href="style/article.css" rel="stylesheet" type="text/css" />
+</head>
+<body><!--{include file="./top.htm"}-->
+<div class="container">
+<!--{include file="./header.htm"}-->
+  <div class="ivy"><!--{iCMS:advertise name="内容页顶部通栏下面"}--></div>
+  <div class="main cbody"> <!--左侧-->
+    <div class="pleft">
+      <div class="placenav"> <span>当前位置 :</span><a href="/">首页</a> »  <!--{$forum.nav}--> </div>
+      <!--资讯内容-->
+      <div class="cBox"> <!--资讯标题-->
+        <div class="ivy"><!--{iCMS:advertise name="内容页标题上面"}--></div>
+        <div class="title">
+          <h1><!--{$content.title}--></h1>
+        </div>
+        <div class="ivy"><!--{iCMS:advertise name="内容页标题下面"}--></div>
+        <!--相关信息-->
+        <div class="info"><span><!--{$content.pubdate|date:"Y-m-d H:i:s"}--></span>&nbsp;&nbsp;&nbsp录入：<span><!--{$content.editor|default:'admin'}--> </span> <span style="display:none;"><!--{$content.hits}--></span></div>
+        <!--{if $content.tags}-->
+        <div class="taglink">相关专题: <span><!--{$content.taglink}--></span> </div>
+        <!--{/if}--> 
+        <!--资讯正文-->
+        <div class="ivy"><!--{iCMS:advertise name="内容页内容上面"}--></div>
+        <div class="content"><pre><!--{$content|print_r}--></pre></div>
+        <script type="text/javascript">
+document.body.oncopy = function () { 
+	setTimeout(function () { var text = clipboardData.getData("text"); if (text) { text = text + "\r\n参考链接："+location.href; clipboardData.setData("text", text); } }, 100 ); 
+}
+$(function(){
+	$(".content img").each(function(i){
+		iimgFix(this,550,600);
+	}); 
+}); 
+function iimgFix(im,x,y){
+	y = y || 99999
+	im.removeAttribute("width");
+	im.removeAttribute("height");
+	if( im.width/im.height > x/y  && im.width >x ){
+		im.height = im.height * (x/im.width)
+		im.width = x
+		im.parentNode.style.height = im.height * (x/im.width) + 'px'
+	}else if( im.width/im.height <= x/y && im.height >y){
+		im.width = im.width * (y/im.height)
+		im.height = y
+		im.parentNode.style.height = y + 'px'
+	}
+}
+</script> 
+        <!--操作--> 
+        <!--上下文-->
+        <div class="context">
+          <div class='diggArea'>
+            <div class='diggNum' id='good_<!--{$content.id}-->'><!--{$content.good}--></div>
+            <div class="diggLink"><a href="javascript:iCMS.digg('good',<!--{$content.id}-->,<!--{$content.mid}-->);">给力</a></div>
+          </div>
+          <div class='diggArea'>
+            <div class='diggNum' id='bad_<!--{$content.id}-->'><!--{$content.bad}--></div>
+            <div class="diggLink"><a href="javascript:iCMS.digg('bad',<!--{$content.id}-->,<!--{$content.mid}-->);">浮云</a></div>
+          </div>
+          <div style="float:left; margin-left:20px;">上一篇： <!--{$content.prev}--> <br />
+            下一篇： <!--{$content.next}--> </div>
+        </div>
+        <div class="floatclear"><!--清除浮动--></div>
+        <div class="actbar"> <span>[<a href="<!--{$content.commentUrl}-->">评论</a>]</span> <span>[<a href="#" onClick="window.print();">打印</a>]</span> <span>[<a href="#" onClick="window.close();">关闭</a>]</span> </div>
+        <div class="floatclear"><!--清除浮动--></div>
+      </div>
+      <div class="blank6"></div>
+      <div class="cBox">
+        <div class="h">
+          <div class="ht">有关 <!--{$content.title}--> 的相关内容</div>
+        </div>
+        <div class="c">
+          <ul class='cTxt'>
+            <!--{iCMS:contents loop='true' row="12" action="tag" tag=$content.tag.0.name indexId!=$content.id}-->
+            <li><i>[<!--{$contents.sort.link}-->]</i> <a href='<!--{$contents.url}-->'><!--{$contents.title}--></a></li>
+            <!--{/iCMS}-->
+          </ul>
+          <div class="floatclear"><!--清除浮动--></div>
+        </div>
+      </div>
+      <div class="blank6"></div>
+      <!--评论-->
+      <div class="comment"> <!--评论:标题-->
+        <div class="commenttitle">
+          <div class="title"><strong>最新评论</strong>共有 <!--{$content.comments}--> 位网友发表了评论 </div>
+          <div class="gotopost"><a href="<!--{$content.commentUrl}-->">查看所有评论</a></div>
+        </div>
+        <!--评论内容-->
+        <div class="commentbox"> <!--{iCMS:comment call='js'}--> </div>
+        <!--发表评论:标题-->
+        <div class="posttitle"><strong>发表评论</strong></div>
+        <!--发表评论-->
+        <div class="postbox"><!--{iCMS:comment width='98%' height='120'}--></div>
+      </div>
+    </div>
+    <!--右侧-->
+    <div class="pright"> <!--侧边信息列表-->
+      <div class="ivy ar1"><!--{iCMS:advertise name="内容页右侧第一栏"}--></div>
+      <div class="rlist mt10">
+        <div class="title">
+          <ul id="top10">
+            <li class="active mark" index='0'>排行榜</li>
+            <!--{iCMS:forums type='top' loop='true' fid!=$forum.rootid row="3"}-->
+            <li class="mark" index='<!--{$forums.rownum}-->'><!--{$forums.name}--></li>
+            <!--{/iCMS}-->
+          </ul>
+        </div>
+        <div class="rbox">
+          <ul class='txtlist ulTop'>
+            <!--{iCMS:contents loop='true' orderby='hot' row="10" mid=$forum.mid fid=$forum.fid id!=$show.id}-->
+            <li><a href='<!--{$contents.url}-->'><!--{$contents.title}--></a></li>
+            <!--{/iCMS}-->
+          </ul><!--{iCMS:forums type='top' loop='true' fid!=$forum.rootid row="3"}-->
+          <ul class='txtlist ulTop' style="display:none;">
+          <!--{if $forums.mid}-->
+            <!--{iCMS:contents loop='true' sub='all'  orderby='hot' row="10" mid=$forums.mid fid=$forums.fid id!=$show.id}-->
+            <li><a href='<!--{$contents.url}-->'><!--{$contents.title}--></a></li>
+            <!--{/iCMS}-->
+          <!--{else}-->
+            <!--{iCMS:list loop='true' sub='all'  orderby='hot' row="10" fid=$forums.fid id!=$show.id}-->
+            <li><a href='<!--{$list.url}-->'><!--{$list.title}--></a></li>
+            <!--{/iCMS}-->
+            <!--{/if}-->
+          </ul>
+          <!--{/iCMS}-->
+        </div>
+      </div>
+    <script type="text/javascript">
+    	$("#top10 li").mouseover(function(){
+    		$("#top10 li").removeClass("active");
+    		$(".ulTop").hide();
+    		$(this).addClass('active');
+    		var index=$(this).attr('index');
+    		$(".ulTop:eq("+index+")").show();
+    	}); 
+    </script>
+
+      <div class="ivy ar2 mt10"><!--{iCMS:advertise name="内容页右侧第二栏"}--></div>
+      <!--侧边信息列表-->
+      <div class="rlist mt10">
+        <div class="title"><!--{$forum.subname}-->推荐</div>
+        <div class="rbox">
+          <ul class='txtlist'>
+            <!--{iCMS:contents loop='true' row="10" mid=$forum.mid fid=$forum.fid id!=$content.id}--> 
+            <li><a href='<!--{$contents.url}-->'><!--{$contents.title}--></a></li>
+            <!--{/iCMS}-->
+          </ul>
+        </div>
+      </div>
+      <div class="ivy ar4 mt10"><!--{iCMS:advertise name="内容页右侧第四栏"}--></div>
+      <div class="rlist mt10">
+        <div class="title">热门标签</div>
+        <div class="rbox" id="hotTags"> 
+          <!--{iCMS:tag loop="true" row="50" orderby="hot" sortid=$forum.rootid}--> 
+          <a href="<!--{$tag.url}-->" title="<!--{$tag.name}-->"><!--{$tag.name}--></a> 
+          <!--{/iCMS}--> 
+        </div>
+      </div>
+    </div>
+    <div class="ivy ar5 mt10"><!--{iCMS:advertise name="内容页右侧第五栏"}--></div>
+    <div class="floatclear"><!--清除浮动--></div>
+  </div>
+  <!--{include file="./footer.htm"}--> </div>
+</body>
+</html>
